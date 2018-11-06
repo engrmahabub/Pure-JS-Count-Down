@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pure JS Digital Clock</title>
+	<style>
+		body{
+		  margin:20% 40%;
+		  background:rgba(15,15,88,.4);
+		  color:#fff;
+		}
+		div{
+		  position:relative;
+		  margin-left:8px;
+		  margin-right:8px;
+		  text-align:center;
+		  width:84px;
+		  height:84px;
+		  box-shadow:0 0 20px rgba(0,0,0,.4);
+		  padding:15px;
+		  display:inline;
+		  font-size:25px;
+		  border-radius: 15px;
+		  background: #009688;
+		}
+	</style>
+	<script type="text/javascript">
+		let CountDown = function () {
+			var now = new Date();
+			var eventDate = new Date(2018,9,30);
+
+			var currentTime = now.getTime();
+			var eventTime 	= eventDate.getTime();
+
+			var remTime 	= eventTime - currentTime;
+
+			var s = Math.floor(remTime/1000);
+			var m = Math.floor(s/60);
+			var h = Math.floor(m/60);
+			var d = Math.floor(h/24);
+
+			h %= 24;
+			m %= 60;
+			s %= 60;
+
+			document.getElementById('ds').innerHTML = d;
+			document.getElementById('hr').innerHTML = checkTime(h);
+		  	document.getElementById('mn').innerHTML = checkTime(m);
+		  	document.getElementById('se').innerHTML = checkTime(s);
+
+		  	var t = setTimeout("CountDown()",500);
+		}
+
+		let checkTime = function(id){
+			if (id<10) {
+				id = "0"+id;
+			}
+			return id;
+		}
+	</script>
+</head>
+<body onload="CountDown()">
+  <div id="ds">00</div>:<div id="hr">00</div>:<div id="mn">00</div>:<div id="se">00</div>
+</body>
+</html>
